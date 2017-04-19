@@ -23,9 +23,41 @@ class BugTable extends React.Component{
 }
 
 class BugForm extends React.Component{
+	constructor(props){
+		super(props);
+		this.state={};
+	}
+	_handleClick(e){
+		e.preventDefault();
+		this.props.addBug(this.state);
+		this.setState({owner:"",title:"",status:"",priority:""});
+	}
+	_handleChange(e){
+		e.preventDefault();
+		let target=e.target;
+		this.setState({[target.name]:target.value})
+	}
 	render(){
 		return(
-			<div className="col-xs-12 text-center">Place Holder Text for Form</div>	
+			<form onChange={this._handleChange.bind(this)} className="form-inline">
+			  <div className="form-group">
+			    <label for="owner">Owner</label>
+			    <input value={this.state.owner} name="owner" type="text" className="form-control" id="owner" placeholder="Jane Doe"/>
+			  </div>
+			  <div className="form-group">
+			    <label for="title">Title</label>
+			    <input value={this.state.title} name="title" type="text" className="form-control" id="title" placeholder="title"/>
+			  </div>
+			  <div className="form-group">
+			    <label for="status">Status</label>
+			    <input value={this.state.status} name="status" type="text" className="form-control" id="status" placeholder="status"/>
+			  </div>
+			  <div className="form-group">
+			    <label for="priority">Priority</label>
+			    <input value={this.state.priority} name="priority" type="text" className="form-control" id="priority" placeholder="priority"/>
+			  </div>
+			  <button onClick={this._handleClick.bind(this)} type="submit" className="btn btn-default">Submit</button>
+			</form>	
 		);
 	}
 }
@@ -52,13 +84,19 @@ class BugList extends React.Component{
 				{status:"inactive",priority:"2",owner:"You",title:"Testing1"}]
 		};
 	}
+	_handleAddBug(bug){
+		this.setState({
+			bugs:this.state.bugs.concat([bug])
+			
+		});
+	}
 	render(){
 		return(
 			<div>
 				<h1 className="text-center">Bug Filter</h1>
 				<BugFilter/>
 				<BugTable bugList={this.state.bugs}/>
-				<BugForm/>
+				<BugForm addBug={this._handleAddBug.bind(this)}/>
 			</div>
 		);
 	}
