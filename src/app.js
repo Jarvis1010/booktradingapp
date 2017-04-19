@@ -10,7 +10,7 @@ class BugTable extends React.Component{
 	
 	render(){
 		var bugRows=this.props.bugList.map((bug,index)=>{
-			return(<BugRow id={bug.id} status={bug.status} priority={bug.priority} owner={bug.owner} title={bug.title} key={index}/>);
+			return(<BugRow {...bug} key={index}/>);
 		});
 		return(
 			<table className="table">
@@ -26,6 +26,8 @@ class BugForm extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={};
+		this._handleChange=this._handleChange.bind(this);
+		this._handleClick=this._handleClick.bind(this);
 	}
 	_handleClick(e){
 		e.preventDefault();
@@ -39,7 +41,7 @@ class BugForm extends React.Component{
 	}
 	render(){
 		return(
-			<form onChange={this._handleChange.bind(this)} className="form-inline">
+			<form onChange={this._handleChange} className="form-inline">
 			  <div className="form-group">
 			    <label for="owner">Owner</label>
 			    <input value={this.state.owner} name="owner" type="text" className="form-control" id="owner" placeholder="Jane Doe"/>
@@ -56,7 +58,7 @@ class BugForm extends React.Component{
 			    <label for="priority">Priority</label>
 			    <input value={this.state.priority} name="priority" type="text" className="form-control" id="priority" placeholder="priority"/>
 			  </div>
-			  <button onClick={this._handleClick.bind(this)} type="submit" className="btn btn-default">Submit</button>
+			  <button onClick={this._handleClick} type="submit" className="btn btn-default">Submit</button>
 			</form>	
 		);
 	}
@@ -83,6 +85,7 @@ class BugList extends React.Component{
 			bugs:[{status:"active",priority:"1",owner:"Me",title:"Testing"},
 				{status:"inactive",priority:"2",owner:"You",title:"Testing1"}]
 		};
+		this._handleAddBug=this._handleAddBug.bind(this);
 	}
 	_handleAddBug(bug){
 		this.setState({
@@ -96,7 +99,7 @@ class BugList extends React.Component{
 				<h1 className="text-center">Bug Filter</h1>
 				<BugFilter/>
 				<BugTable bugList={this.state.bugs}/>
-				<BugForm addBug={this._handleAddBug.bind(this)}/>
+				<BugForm addBug={this._handleAddBug}/>
 			</div>
 		);
 	}
