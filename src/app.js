@@ -1,3 +1,7 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import jQuery from "jquery";
+
 class BugFilter extends React.Component{
 	render(){
 		return(
@@ -94,12 +98,12 @@ class BugList extends React.Component{
 				console.log(this.state);
 			}
 		};
-		$.ajax(request);
+		jQuery.ajax(request);
 	}
 	
 	_handleAddBug(bug){
 		
-		$.post('/api/bugs',bug,(res)=>{
+		jQuery.post('/api/bugs',bug,(res)=>{
 			this.setState({
 				bugs:this.state.bugs.concat(res)
 			});	
