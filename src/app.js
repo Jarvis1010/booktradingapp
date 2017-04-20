@@ -58,7 +58,7 @@ class BugForm extends React.Component{
 			    <label for="priority">Priority</label>
 			    <input value={this.state.priority} name="priority" type="text" className="form-control" id="priority" placeholder="priority"/>
 			  </div>
-			  <button onClick={this._handleClick} type="submit" className="btn btn-default">Submit</button>
+			  <button onClick={this._handleClick} className="btn btn-default">Submit</button>
 			</form>	
 		);
 	}
@@ -81,17 +81,34 @@ class BugRow extends React.Component{
 class BugList extends React.Component{
 	constructor(props){
 		super(props);
-		this.state={
-			bugs:[{status:"active",priority:"1",owner:"Me",title:"Testing"},
-				{status:"inactive",priority:"2",owner:"You",title:"Testing1"}]
-		};
+		this.state={bugs:[]};
 		this._handleAddBug=this._handleAddBug.bind(this);
 	}
+	
+	_fetchBugs(){
+		let request={
+			method:'GET',
+			url:'/api/bugs',
+			success:(results)=>{
+				this.setState({bugs:results});
+				console.log(this.state);
+			}
+		};
+		$.ajax(request);
+	}
+	
 	_handleAddBug(bug){
-		this.setState({
-			bugs:this.state.bugs.concat([bug])
-			
+		
+		$.post('/api/bugs',bug,(res)=>{
+			this.setState({
+				bugs:this.state.bugs.concat(res)
+			});	
 		});
+		
+		
+	}
+	componentWillMount(){
+		this._fetchBugs();
 	}
 	render(){
 		return(

@@ -1,3 +1,5 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 class BugFilter extends React.Component {
 	render() {
 		return React.createElement(
@@ -12,7 +14,7 @@ class BugTable extends React.Component {
 
 	render() {
 		var bugRows = this.props.bugList.map((bug, index) => {
-			return React.createElement(BugRow, { id: bug.id, status: bug.status, priority: bug.priority, owner: bug.owner, title: bug.title, key: index });
+			return React.createElement(BugRow, _extends({}, bug, { key: index }));
 		});
 		return React.createElement(
 			"table",
@@ -30,6 +32,8 @@ class BugForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
+		this._handleChange = this._handleChange.bind(this);
+		this._handleClick = this._handleClick.bind(this);
 	}
 	_handleClick(e) {
 		e.preventDefault();
@@ -44,7 +48,7 @@ class BugForm extends React.Component {
 	render() {
 		return React.createElement(
 			"form",
-			{ onChange: this._handleChange.bind(this), className: "form-inline" },
+			{ onChange: this._handleChange, className: "form-inline" },
 			React.createElement(
 				"div",
 				{ className: "form-group" },
@@ -87,7 +91,7 @@ class BugForm extends React.Component {
 			),
 			React.createElement(
 				"button",
-				{ onClick: this._handleClick.bind(this), type: "submit", className: "btn btn-default" },
+				{ onClick: this._handleClick, className: "btn btn-default" },
 				"Submit"
 			)
 		);
@@ -131,15 +135,32 @@ class BugRow extends React.Component {
 class BugList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			bugs: [{ status: "active", priority: "1", owner: "Me", title: "Testing" }, { status: "inactive", priority: "2", owner: "You", title: "Testing1" }]
-		};
+		this.state = { bugs: [] };
+		this._handleAddBug = this._handleAddBug.bind(this);
 	}
-	_handleAddBug(bug) {
-		this.setState({
-			bugs: this.state.bugs.concat([bug])
 
+	_fetchBugs() {
+		let request = {
+			method: 'GET',
+			url: '/api/bugs',
+			success: results => {
+				this.setState({ bugs: results });
+				console.log(this.state);
+			}
+		};
+		$.ajax(request);
+	}
+
+	_handleAddBug(bug) {
+
+		$.post('/api/bugs', bug, res => {
+			this.setState({
+				bugs: this.state.bugs.concat(res)
+			});
 		});
+	}
+	componentWillMount() {
+		this._fetchBugs();
 	}
 	render() {
 		return React.createElement(
@@ -152,7 +173,7 @@ class BugList extends React.Component {
 			),
 			React.createElement(BugFilter, null),
 			React.createElement(BugTable, { bugList: this.state.bugs }),
-			React.createElement(BugForm, { addBug: this._handleAddBug.bind(this) })
+			React.createElement(BugForm, { addBug: this._handleAddBug })
 		);
 	}
 }
