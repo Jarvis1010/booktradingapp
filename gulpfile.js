@@ -4,7 +4,7 @@ var gulp =require( 'gulp');
 var source =require( 'vinyl-source-stream');
 var watchify =require( 'watchify');
 
-gulp.task('default', ()=> {
+gulp.task('default', (callback)=> {
     
     var bundler = browserify({
       entries: ['src/app.js'],
@@ -17,6 +17,13 @@ gulp.task('default', ()=> {
         return bundler
         .transform("babelify")
         .bundle()
+        .on('error', (err)=>{
+          console.log(err.message);
+          this.emit('end');
+        })
+        .on('end',()=>{
+            console.log("finished");
+        })
         .pipe(source("bundle.js"))
         .pipe(gulp.dest("public"));
     };
