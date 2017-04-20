@@ -5,7 +5,7 @@ import jQuery from "jquery";
 class BugFilter extends React.Component{
 	render(){
 		return(
-			<div className="col-xs-12 text-center">Place Holder Text for Filter</div>	
+			<div className="col-xs-12 text-center"><h4>Place Holder Text for Filter</h4></div>	
 		);
 	}
 }
@@ -95,7 +95,6 @@ class BugList extends React.Component{
 			url:'/api/bugs',
 			success:(results)=>{
 				this.setState({bugs:results});
-				console.log(this.state);
 			}
 		};
 		jQuery.ajax(request);
@@ -121,6 +120,7 @@ class BugList extends React.Component{
 				<BugFilter/>
 				<BugTable bugList={this.state.bugs}/>
 				<BugForm addBug={this._handleAddBug}/>
+				
 			</div>
 		);
 	}
