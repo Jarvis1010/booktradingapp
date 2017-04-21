@@ -9,9 +9,10 @@ import Layout from './components/layout';
 
 const app=(
 	<Router>
-		<Route path="/" component={Layout}>
-			<Route path="bugs" component={BugList}/>
-		</Route>
+		<Layout>
+			<Route exact={true} path="/" render={()=>{return(<h1>Hi</h1>);}}/>
+			<Route path="/bugs" component={BugList}/>
+		</Layout>
 	</Router>
 ); 
 
