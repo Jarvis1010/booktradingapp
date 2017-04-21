@@ -1,8 +1,8 @@
-
-var browserify =require('browserify');
-var gulp =require( 'gulp');
-var source =require( 'vinyl-source-stream');
-var watchify =require( 'watchify');
+"use strict"
+import browserify from 'browserify';
+import gulp from 'gulp';
+import source from 'vinyl-source-stream';
+import watchify from 'watchify';
 
 gulp.task('default', (callback)=> {
     
