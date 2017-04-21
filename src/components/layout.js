@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 export default class Layout extends React.Component{
     render(){
@@ -19,7 +19,7 @@ export default class Layout extends React.Component{
                 
                     <div className="collapse navbar-collapse" id="collapse-1">
                       <ul className="nav navbar-nav">
-                        <li className="active"><a href="/">Link</a></li>
+                        <li><Link to="/bugs">Bugs</Link></li>
                         <li><a href="/">Link</a></li>
                       </ul>
                       <ul className="nav navbar-nav navbar-right">
