@@ -28,6 +28,7 @@
     "browserify": "^14.3.0",
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
+    "jwt-decode": "^2.2.0",
     "nodemon": "^1.11.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

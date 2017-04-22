@@ -9,4 +9,8 @@ router
 .route('/register')
 .post(ctrUsers.register);
 
+router
+.route('/login')
+.post(ctrUsers.login);
+
 module.exports = router;

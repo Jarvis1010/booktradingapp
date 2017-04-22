@@ -3,7 +3,10 @@ import LoginForm from "./login-form";
 import {Link} from 'react-router-dom';
 
 export default class NavBar extends React.Component{
-	
+	_logout(e){
+	  e.preventDefault();
+	  delete window.sessionStorage.token;
+	}
 	render(){
 		
 		const navBarHeader=(
@@ -18,11 +21,16 @@ export default class NavBar extends React.Component{
             </div>
 		);
 		
-		let navRight=(<p className="navbar-text navbar-right">Welcome</p>);
+		let navRight=(
+		  <div className="navbar-form navbar-right">
+		    <p className="navbar-text">Welcome {this.props.userName}</p>
+		    <button onClick={this._logout.bind(this)} className="btn btn-primary">Logout</button>
+		  </div>  
+		);
 		let navLeft=(<li><Link to="/profile">Profile</Link></li>);
 		
 		if(!this.props.isLoggedIn){
-			navRight=(<LoginForm/>);
+			navRight=(<LoginForm login={this.props.login}/>);
 			navLeft=(<li><Link to="/register">Register</Link></li>);
 		}
 		
