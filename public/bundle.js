@@ -34439,7 +34439,7 @@ var app = _react2.default.createElement(
 
 _reactDom2.default.render(app, document.getElementById('myapp'));
 
-},{"./components/layout":254,"./components/register-page":257,"jquery":2,"react":252,"react-dom":3,"react-router-dom":168}],254:[function(require,module,exports){
+},{"./components/layout":254,"./components/register-page":258,"jquery":2,"react":252,"react-dom":3,"react-router-dom":168}],254:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34500,7 +34500,7 @@ var Layout = function (_React$Component) {
 
 exports.default = Layout;
 
-},{"./nav-bar":256,"react":252}],255:[function(require,module,exports){
+},{"./nav-bar":257,"react":252}],255:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34575,6 +34575,85 @@ var LoginForm = function (_React$Component) {
 exports.default = LoginForm;
 
 },{"jquery":2,"react":252}],256:[function(require,module,exports){
+"use strict";
+
+var _typeof3 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _typeof2 = typeof Symbol === "function" && _typeof3(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof3(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof3(obj);
+};
+
+var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+};
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+function _possibleConstructorReturn(self, call) {
+    if (!self) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var Message = function (_React$Component) {
+    _inherits(Message, _React$Component);
+
+    function Message() {
+        _classCallCheck(this, Message);
+
+        return _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).apply(this, arguments));
+    }
+
+    _createClass(Message, [{
+        key: "render",
+        value: function render() {
+            var alert = this.props.error ? "alert alert-danger" : "alert alert-success";
+            return _react2.default.createElement("div", { className: "col-md-6 col-md-offset-3 col-xs-12 " + alert, role: "alert" }, this.props.error || this.props.message);
+        }
+    }]);
+
+    return Message;
+}(_react2.default.Component);
+
+exports.default = Message;
+
+},{"react":252}],257:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34695,10 +34774,118 @@ var NavBar = function (_React$Component) {
 
 exports.default = NavBar;
 
-},{"./login-form":255,"react":252,"react-router-dom":168}],257:[function(require,module,exports){
+},{"./login-form":255,"react":252,"react-router-dom":168}],258:[function(require,module,exports){
 "use strict";
 
-var _typeof17 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof35 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _typeof34 = typeof Symbol === "function" && _typeof35(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof35(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof35(obj);
+};
+
+var _typeof33 = typeof Symbol === "function" && _typeof34(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof34(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof34(obj);
+};
+
+var _typeof32 = typeof Symbol === "function" && _typeof33(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof33(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof33(obj);
+};
+
+var _typeof31 = typeof Symbol === "function" && _typeof32(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof32(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof32(obj);
+};
+
+var _typeof30 = typeof Symbol === "function" && _typeof31(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof31(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof31(obj);
+};
+
+var _typeof29 = typeof Symbol === "function" && _typeof30(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof30(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof30(obj);
+};
+
+var _typeof28 = typeof Symbol === "function" && _typeof29(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof29(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof29(obj);
+};
+
+var _typeof27 = typeof Symbol === "function" && _typeof28(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof28(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof28(obj);
+};
+
+var _typeof26 = typeof Symbol === "function" && _typeof27(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof27(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof27(obj);
+};
+
+var _typeof25 = typeof Symbol === "function" && _typeof26(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof26(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof26(obj);
+};
+
+var _typeof24 = typeof Symbol === "function" && _typeof25(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof25(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof25(obj);
+};
+
+var _typeof23 = typeof Symbol === "function" && _typeof24(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof24(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof24(obj);
+};
+
+var _typeof22 = typeof Symbol === "function" && _typeof23(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof23(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof23(obj);
+};
+
+var _typeof21 = typeof Symbol === "function" && _typeof22(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof22(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof22(obj);
+};
+
+var _typeof20 = typeof Symbol === "function" && _typeof21(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof21(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof21(obj);
+};
+
+var _typeof19 = typeof Symbol === "function" && _typeof20(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof20(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof20(obj);
+};
+
+var _typeof18 = typeof Symbol === "function" && _typeof19(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof19(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof19(obj);
+};
+
+var _typeof17 = typeof Symbol === "function" && _typeof18(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof18(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof18(obj);
+};
 
 var _typeof16 = typeof Symbol === "function" && _typeof17(Symbol.iterator) === "symbol" ? function (obj) {
     return typeof obj === "undefined" ? "undefined" : _typeof17(obj);
@@ -34818,8 +35005,20 @@ var _jquery = require("jquery");
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _message = require("./message");
+
+var _message2 = _interopRequireDefault(_message);
+
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _defineProperty(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+    } else {
+        obj[key] = value;
+    }return obj;
 }
 
 function _classCallCheck(instance, Constructor) {
@@ -34848,22 +35047,69 @@ var LoginForm = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this));
 
-        _this.state = {};
+        _this.state = { message: '', error: '' };
 
         _this._handleClick = _this._handleClick.bind(_this);
+        _this._handleChange = _this._handleChange.bind(_this);
         return _this;
     }
 
     _createClass(LoginForm, [{
+        key: "_passwordsMatch",
+        value: function _passwordsMatch() {
+            return this.state.password === this.state.passwordRepeat;
+        }
+    }, {
+        key: "_handleChange",
+        value: function _handleChange(e) {
+            e.preventDefault();
+            var target = e.target;
+            this.setState(_defineProperty({}, target.name, target.value));
+        }
+    }, {
         key: "_handleClick",
         value: function _handleClick(e) {
+            var _this2 = this;
+
             e.preventDefault();
-            console.log(e);
+            if (this._passwordsMatch()) {
+                var data = {
+                    username: this.state.username,
+                    email: this.state.email,
+                    password: this.state.password
+                };
+                var query = {
+                    method: "POST",
+                    url: "/api/register",
+                    data: data,
+                    error: function error(err) {
+                        _this2.setState({ error: err.message });
+                    },
+                    success: function success(result) {
+                        _this2.setState({ message: "Successful registration, please login", error: '' });
+                    }
+                };
+                _jquery2.default.ajax(query);
+            } else {
+                this.setState({ error: "Passwords do not match" });
+            }
         }
     }, {
         key: "render",
         value: function render() {
-            return _react2.default.createElement("div", null, _react2.default.createElement("header", { className: "row" }, _react2.default.createElement("h1", { className: "col-md-6 col-md-offset-3 col-xs-12 text-center" }, "Register")), _react2.default.createElement("section", { className: "row" }, _react2.default.createElement("form", { onSubmit: this._handleClick, name: "register", className: "col-md-6 col-md-offset-3 col-xs-12" }, _react2.default.createElement("div", { className: "form-group" }, _react2.default.createElement("label", { "for": "username" }, "Username"), _react2.default.createElement("input", { type: "username", className: "form-control", id: "username", placeholder: "Username", autoCapitalize: "none" })), _react2.default.createElement("div", { className: "form-group" }, _react2.default.createElement("label", { "for": "email" }, "Email"), _react2.default.createElement("input", { type: "email", className: "form-control", id: "email", placeholder: "Email", autoCapitalize: "none" })), _react2.default.createElement("div", { className: "form-group" }, _react2.default.createElement("label", { "for": "password" }, "Password"), _react2.default.createElement("input", { type: "password", className: "form-control", id: "password", placeholder: "Password", autoCapitalize: "none" })), _react2.default.createElement("div", { className: "form-group" }, _react2.default.createElement("label", { "for": "password-repeat" }, "Repeat Password"), _react2.default.createElement("input", { type: "password", className: "form-control", id: "password-repeat", placeholder: "Password", autoCapitalize: "none" })), _react2.default.createElement("button", { className: "btn btn-success" }, "Register"))));
+            var message;
+            var form;
+            if (this.state.message) {
+                message = _react2.default.createElement(_message2.default, { message: this.state.message });
+            } else if (this.state.error) {
+                message = _react2.default.createElement(_message2.default, { error: this.state.error });
+            }
+
+            if (!this.state.message) {
+                form = _react2.default.createElement("section", { className: "row" }, _react2.default.createElement("form", { onSubmit: this._handleClick, onChange: this._handleChange, name: "register", className: "col-md-6 col-md-offset-3 col-xs-12" }, _react2.default.createElement("div", { className: "form-group" }, _react2.default.createElement("label", { "for": "username" }, "Username"), _react2.default.createElement("input", { required: true, type: "username", className: "form-control", id: "username", name: "username", placeholder: "Username", autoCapitalize: "none" })), _react2.default.createElement("div", { className: "form-group" }, _react2.default.createElement("label", { "for": "email" }, "Email"), _react2.default.createElement("input", { required: true, type: "email", className: "form-control", id: "email", name: "email", placeholder: "Email", autoCapitalize: "none" })), _react2.default.createElement("div", { className: "form-group" }, _react2.default.createElement("label", { "for": "password" }, "Password"), _react2.default.createElement("input", { required: true, type: "password", className: "form-control", id: "password", name: "password", placeholder: "Password", autoCapitalize: "none" })), _react2.default.createElement("div", { className: "form-group" }, _react2.default.createElement("label", { "for": "password-repeat" }, "Repeat Password"), _react2.default.createElement("input", { required: true, type: "password", className: "form-control", id: "password-repeat", name: "passwordRepeat", placeholder: "Password", autoCapitalize: "none" })), _react2.default.createElement("button", { className: "btn btn-success" }, "Register")));
+            }
+
+            return _react2.default.createElement("div", null, _react2.default.createElement("header", { className: "row" }, _react2.default.createElement("h1", { className: "col-md-6 col-md-offset-3 col-xs-12 text-center" }, "Register")), form, _react2.default.createElement("div", { className: "row padded" }, message));
         }
     }]);
 
@@ -34872,4 +35118,4 @@ var LoginForm = function (_React$Component) {
 
 exports.default = LoginForm;
 
-},{"jquery":2,"react":252}]},{},[253]);
+},{"./message":256,"jquery":2,"react":252}]},{},[253]);
