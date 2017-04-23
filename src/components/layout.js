@@ -2,6 +2,10 @@ import React from 'react';
 import NavBar from './nav-bar';
 import jQuery from "jquery";
 import jwtDecode from 'jwt-decode';
+import {HashRouter as Router, Route, Redirect} from 'react-router-dom';
+import RegisterPage from './register-page';
+import ProfilePage from './profile-page';
+import MainPage from './main-page';
 
 export default class Layout extends React.Component{
     constructor(props){
@@ -55,12 +59,16 @@ export default class Layout extends React.Component{
     render(){
         <NavBar login={this._login}/>
         return(
-            <div>
+            <Router>
+                <div>
                 <NavBar {...this.state} login={this._login}/>
                 <div className="container">
-                    {this.props.children}
+                    <Route exact={true} path="/" render={()=>{return <MainPage {...this.state}/>;}}/>
+        			<Route path="/register" render={()=>{return <RegisterPage {...this.state}/>;}}/>
+        			<Route path="/profile" render={()=>{return <ProfilePage {...this.state}/>;}}/>
                 </div>
-            </div>    
+                </div>
+            </Router>    
         );
     }
 }
