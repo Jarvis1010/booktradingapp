@@ -6,6 +6,7 @@ export default class NavBar extends React.Component{
 	_logout(e){
 	  e.preventDefault();
 	  delete window.sessionStorage.token;
+	  location.path('/');
 	}
 	render(){
 		

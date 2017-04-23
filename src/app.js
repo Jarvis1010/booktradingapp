@@ -5,12 +5,15 @@ import {HashRouter as Router, Route, Redirect} from 'react-router-dom';
 
 import Layout from './components/layout';
 import RegisterPage from './components/register-page';
+import ProfilePage from './components/profile-page';
+import MainPage from './components/main-page';
 
 const app=(
 	<Router>
 		<Layout>
-			<Route exact={true} path="/" render={()=>{return(<h1 className="text-center">Main Page</h1>);}}/>
+			<Route exact={true} path="/" component={MainPage}/>
 			<Route path="/register" component={RegisterPage}/>
+			<Route path="/profile" component={ProfilePage}/>
 		</Layout>
 	</Router>
 ); 

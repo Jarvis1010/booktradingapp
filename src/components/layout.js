@@ -53,6 +53,7 @@ export default class Layout extends React.Component{
     }
     
     render(){
+        <NavBar login={this._login}/>
         return(
             <div>
                 <NavBar {...this.state} login={this._login}/>
