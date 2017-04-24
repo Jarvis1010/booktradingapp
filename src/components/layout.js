@@ -38,8 +38,10 @@ export default class Layout extends React.Component{
                 this._authenticate();
             },
             error:(err)=>{
-                console.log(err);
-                delete window.sessionStorage.token;
+                console.log(err.message);
+               if(err.status===401||err.status===403){
+                  delete window.sessionStorage.token;
+               }
             },
         }
         
@@ -61,12 +63,12 @@ export default class Layout extends React.Component{
         return(
             <Router>
                 <div>
-                <NavBar {...this.state} login={this._login}/>
-                <div className="container">
-                    <Route exact={true} path="/" render={()=>{return <MainPage {...this.state}/>;}}/>
-        			<Route path="/register" render={()=>{return <RegisterPage {...this.state}/>;}}/>
-        			<Route path="/profile" render={()=>{return <ProfilePage {...this.state}/>;}}/>
-                </div>
+                    <NavBar {...this.state} login={this._login}/>
+                    <div className="container">
+                        <Route exact={true} path="/" render={()=>{return <MainPage {...this.state}/>;}}/>
+            			<Route path="/register" render={()=>{return <RegisterPage {...this.state}/>;}}/>
+            			<Route path="/profile" render={()=>{return <ProfilePage {...this.state}/>;}}/>
+                    </div>
                 </div>
             </Router>    
         );

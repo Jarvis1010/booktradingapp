@@ -34507,12 +34507,6 @@ var _reactDom = require("react-dom");
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _jquery = require("jquery");
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _reactRouterDom = require("react-router-dom");
-
 var _layout = require("./components/layout");
 
 var _layout2 = _interopRequireDefault(_layout);
@@ -34521,7 +34515,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _reactDom2.default.render(_react2.default.createElement(_layout2.default, null), document.getElementById('myapp'));
 
-},{"./components/layout":257,"jquery":2,"react":255,"react-dom":6,"react-router-dom":171}],257:[function(require,module,exports){
+},{"./components/layout":257,"react":255,"react-dom":6}],257:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34612,8 +34606,10 @@ var Layout = function (_React$Component) {
                     _this2._authenticate();
                 },
                 error: function error(err) {
-                    console.log(err);
-                    delete window.sessionStorage.token;
+                    console.log(err.message);
+                    if (err.status === 401 || err.status === 403) {
+                        delete window.sessionStorage.token;
+                    }
                 }
             };
 
@@ -34669,7 +34665,7 @@ var Layout = function (_React$Component) {
 
 exports.default = Layout;
 
-},{"./main-page":259,"./nav-bar":261,"./profile-page":262,"./register-page":263,"jquery":2,"jwt-decode":5,"react":255,"react-router-dom":171}],258:[function(require,module,exports){
+},{"./main-page":259,"./nav-bar":261,"./profile-page":262,"./register-page":264,"jquery":2,"jwt-decode":5,"react":255,"react-router-dom":171}],258:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34996,6 +34992,113 @@ exports.default = NavBar;
 },{"./login-form":258,"react":255,"react-router-dom":171}],262:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _jwtDecode = require('jwt-decode');
+
+var _jwtDecode2 = _interopRequireDefault(_jwtDecode);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _profile = require('./profile');
+
+var _profile2 = _interopRequireDefault(_profile);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProfilePage = function (_React$Component) {
+    _inherits(ProfilePage, _React$Component);
+
+    function ProfilePage(props) {
+        _classCallCheck(this, ProfilePage);
+
+        var _this = _possibleConstructorReturn(this, (ProfilePage.__proto__ || Object.getPrototypeOf(ProfilePage)).call(this, props));
+
+        _this.state = {
+            _id: '',
+            email: '',
+            name: '',
+            username: '',
+            location: ''
+        };
+
+        _this._saveChanges = _this._saveChanges.bind(_this);
+        return _this;
+    }
+
+    _createClass(ProfilePage, [{
+        key: '_saveChanges',
+        value: function _saveChanges(profile) {
+            delete profile.changed;
+            console.log(profile);
+        }
+    }, {
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var _this2 = this;
+
+            var query = {
+                url: "/api/profile",
+                beforeSend: function beforeSend(xhr) {
+                    xhr.setRequestHeader('Authorization', "Bearer " + window.sessionStorage.token);
+                },
+                success: function success(res) {
+                    _this2.setState(res);
+                },
+                error: function error(err) {
+                    console.log(err.message);
+                    if (err.status === 401 || err.status === 403) {
+                        delete window.sessionStorage.token;
+                    }
+                }
+            };
+            _jquery2.default.ajax(query);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var page = void 0;
+            if (!this.props.isLoggedIn) {
+                page = _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+            }
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                page,
+                _react2.default.createElement(_profile2.default, { name: this.state.name, username: this.state.username,
+                    email: this.state.email, location: this.state.location,
+                    saveProfile: this._saveChanges })
+            );
+        }
+    }]);
+
+    return ProfilePage;
+}(_react2.default.Component);
+
+exports.default = ProfilePage;
+
+},{"./profile":263,"jquery":2,"jwt-decode":5,"react":255,"react-router-dom":171}],263:[function(require,module,exports){
+'use strict';
+
 var _typeof8 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _typeof7 = typeof Symbol === "function" && _typeof8(Symbol.iterator) === "symbol" ? function (obj) {
@@ -35058,18 +35161,16 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = require('react-router-dom');
-
-var _jwtDecode = require('jwt-decode');
-
-var _jwtDecode2 = _interopRequireDefault(_jwtDecode);
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _defineProperty(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+    } else {
+        obj[key] = value;
+    }return obj;
 }
 
 function _classCallCheck(instance, Constructor) {
@@ -35090,52 +35191,71 @@ function _inherits(subClass, superClass) {
     }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
-var ProfilePage = function (_React$Component) {
-    _inherits(ProfilePage, _React$Component);
+var Profile = function (_React$Component) {
+    _inherits(Profile, _React$Component);
 
-    function ProfilePage(props) {
-        _classCallCheck(this, ProfilePage);
+    function Profile(props) {
+        _classCallCheck(this, Profile);
 
-        var _this = _possibleConstructorReturn(this, (ProfilePage.__proto__ || Object.getPrototypeOf(ProfilePage)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
 
-        _this.state = {};
+        _this.state = { changed: false };
+
+        _this._handleChange = _this._handleChange.bind(_this);
+        _this._cancel = _this._cancel.bind(_this);
+        _this._saveChanges = _this._saveChanges.bind(_this);
         return _this;
     }
 
-    _createClass(ProfilePage, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            var query = {
-                url: "/api/profile",
-                beforeSend: function beforeSend(xhr) {
-                    xhr.setRequestHeader('Authorization', "Bearer " + window.sessionStorage.token);
-                },
-                success: function success(res) {
-                    console.log(res);
-                }
+    _createClass(Profile, [{
+        key: '_handleChange',
+        value: function _handleChange(e) {
+            var _setState;
+
+            this.setState((_setState = {}, _defineProperty(_setState, e.target.name, e.target.value), _defineProperty(_setState, 'changed', true), _setState));
+            console.log(_defineProperty({}, e.target.name, e.target.value));
+        }
+    }, {
+        key: '_cancel',
+        value: function _cancel(e) {
+            e.preventDefault();
+            var defaultState = {
+                changed: false,
+                name: this.props.name || '',
+                username: this.props.username || '',
+                email: this.props.email || '',
+                location: this.props.location || ''
             };
-            _jquery2.default.ajax(query);
+            this.setState(defaultState);
+        }
+    }, {
+        key: '_saveChanges',
+        value: function _saveChanges(e) {
+            e.preventDefault();
+            this.props.saveProfile(this.state);
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(props) {
+            this.setState(props);
         }
     }, {
         key: 'render',
         value: function render() {
-            var page = void 0;
-            if (!this.props.isLoggedIn) {
-                page = _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
-            } else {
-                page = _react2.default.createElement('h1', { className: 'text-center' }, 'Profile Page');
+            var buttons = void 0;
+            if (this.state.changed) {
+                buttons = _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12 padded' }, _react2.default.createElement('button', { onClick: this._cancel, className: 'btn btn-default pull-right' }, 'Cancel'), _react2.default.createElement('button', { onClick: this._saveChanges, className: 'btn btn-success pull-right' }, 'Save Changes'));
             }
-
-            return _react2.default.createElement('div', null, page);
+            return _react2.default.createElement('div', null, _react2.default.createElement('header', { className: 'row' }, _react2.default.createElement('h1', { className: 'text-center' }, 'Profile Page')), _react2.default.createElement('form', { onChange: this._handleChange, className: 'row' }, _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12' }, _react2.default.createElement('h2', { className: 'text-center' }, _react2.default.createElement('input', { name: 'name', type: 'text', className: 'transparent text-center', value: this.state.name, placeholder: 'Enter your name' })), _react2.default.createElement('h3', { className: 'text-center' }, this.state.username), _react2.default.createElement('hr', null)), _react2.default.createElement('h4', { className: 'col-md-3 col-md-offset-3 col-xs-12 text-center' }, _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker' }), _react2.default.createElement('input', { name: 'location', type: 'text', className: 'transparent text-center', value: this.state.location, placeholder: 'Enter your City, State' })), _react2.default.createElement('h4', { className: 'col-md-3 col-xs-12 text-center' }, _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope' }), _react2.default.createElement('input', { required: true, name: 'email', type: 'email', className: 'transparent text-center', value: this.state.email, placeholder: 'Enter your Email' })), buttons));
         }
     }]);
 
-    return ProfilePage;
+    return Profile;
 }(_react2.default.Component);
 
-exports.default = ProfilePage;
+exports.default = Profile;
 
-},{"jquery":2,"jwt-decode":5,"react":255,"react-router-dom":171}],263:[function(require,module,exports){
+},{"react":255}],264:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
