@@ -76,3 +76,15 @@ module.exports.profile=function(req,res){
             }
         });
 };
+
+module.exports.update=function(req,res){
+    User.findByIdAndUpdate(req.body._id,req.body,{new: true},(err,user)=>{
+            if(err||user==null){
+                res.status(400).json(err);
+            }else{
+                var profile=user;
+                delete profile.password;
+                res.json(profile);
+            }
+        });
+};

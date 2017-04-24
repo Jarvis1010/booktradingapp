@@ -35049,16 +35049,14 @@ var ProfilePage = function (_React$Component) {
     _createClass(ProfilePage, [{
         key: '_saveChanges',
         value: function _saveChanges(profile) {
-            delete profile.changed;
-            console.log(profile);
-        }
-    }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {
             var _this2 = this;
 
+            delete profile.changed;
+
             var query = {
+                method: "POST",
                 url: "/api/profile",
+                data: profile,
                 beforeSend: function beforeSend(xhr) {
                     xhr.setRequestHeader('Authorization', "Bearer " + window.sessionStorage.token);
                 },
@@ -35067,9 +35065,35 @@ var ProfilePage = function (_React$Component) {
                 },
                 error: function error(err) {
                     console.log(err.message);
-                    if (err.status === 401 || err.status === 403) {
-                        delete window.sessionStorage.token;
-                    }
+                    _this2._checkAuth(err.status);
+                }
+            };
+
+            _jquery2.default.ajax(query);
+        }
+    }, {
+        key: '_checkAuth',
+        value: function _checkAuth(status) {
+            if (status === 401 || status === 403) {
+                delete window.sessionStorage.token;
+            }
+        }
+    }, {
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var _this3 = this;
+
+            var query = {
+                url: "/api/profile",
+                beforeSend: function beforeSend(xhr) {
+                    xhr.setRequestHeader('Authorization', "Bearer " + window.sessionStorage.token);
+                },
+                success: function success(res) {
+                    _this3.setState(res);
+                },
+                error: function error(err) {
+                    console.log(err.message);
+                    _this3._checkAuth(err.status);
                 }
             };
             _jquery2.default.ajax(query);
@@ -35203,7 +35227,10 @@ var Profile = function (_React$Component) {
         value: function _saveChanges(e) {
             e.preventDefault();
             if (this._validateEmail(this.state.email)) {
-                this.props.saveProfile(this.state);
+                var state = this.state;
+                delete state.saveProfile;
+                this.props.saveProfile(state);
+                this.setState({ changed: false });
             } else {
                 console.log("invalid email");
             }
@@ -35227,7 +35254,7 @@ var Profile = function (_React$Component) {
         value: function render() {
             var buttons = void 0;
             if (this.state.changed) {
-                buttons = _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12 padded' }, _react2.default.createElement('button', { onClick: this._cancel, className: 'btn btn-default pull-right' }, 'Cancel'), _react2.default.createElement('button', { type: 'submit', onClick: this._saveChanges, className: 'btn btn-success pull-right' }, 'Save Changes'));
+                buttons = _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12 padded' }, _react2.default.createElement('button', { onClick: this._cancel, className: 'btn btn-default pull-right' }, 'Cancel'), _react2.default.createElement('button', { onClick: this._saveChanges, className: 'btn btn-success pull-right' }, 'Save Changes'));
             }
             var warning = this._validateEmail(this.state.email) ? '' : 'has-error';
 

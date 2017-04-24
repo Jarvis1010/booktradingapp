@@ -15,6 +15,7 @@ router
 
 router
 .route('/profile')
-.get(ctrUsers.authenticate,ctrUsers.profile);
+.get(ctrUsers.authenticate,ctrUsers.profile)
+.post(ctrUsers.authenticate,ctrUsers.update);
 
 module.exports = router;

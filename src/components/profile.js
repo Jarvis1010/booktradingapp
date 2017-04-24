@@ -27,7 +27,10 @@ export default class Profile extends React.Component{
     _saveChanges(e){
          e.preventDefault();
          if(this._validateEmail(this.state.email)){
-            this.props.saveProfile(this.state);
+            let state = this.state;
+            delete state.saveProfile;
+            this.props.saveProfile(state);
+            this.setState({changed:false});
          }else{
              console.log("invalid email");
          }
@@ -48,7 +51,7 @@ export default class Profile extends React.Component{
                buttons=(
                     <div className="col-md-6 col-md-offset-3 col-xs-12 padded">
                         <button onClick={this._cancel} className="btn btn-default pull-right">Cancel</button>
-                        <button type="submit" onClick={this._saveChanges} className="btn btn-success pull-right">Save Changes</button>
+                        <button onClick={this._saveChanges} className="btn btn-success pull-right">Save Changes</button>
                     </div>
                 ); 
             }

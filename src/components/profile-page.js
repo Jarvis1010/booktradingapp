@@ -21,7 +21,29 @@ export default class ProfilePage extends React.Component{
     }
     _saveChanges(profile){
         delete profile.changed;
-        console.log(profile);
+        
+        let query={
+           method:"POST",
+           url:"/api/profile",
+           data:profile,
+           beforeSend:(xhr)=>{
+               xhr.setRequestHeader('Authorization',"Bearer "+ window.sessionStorage.token);
+           },
+           success:(res)=>{
+               this.setState(res);
+           },
+           error:(err)=>{
+               console.log(err.message);
+               this._checkAuth(err.status);
+           }
+       };
+       
+       jQuery.ajax(query);
+    }
+    _checkAuth(status){
+       if(status===401||status===403){
+            delete window.sessionStorage.token;
+        } 
     }
    componentWillMount(){
        let query={
@@ -34,9 +56,7 @@ export default class ProfilePage extends React.Component{
            },
            error:(err)=>{
                console.log(err.message);
-               if(err.status===401||err.status===403){
-                  delete window.sessionStorage.token;
-               }
+               this._checkAuth(err.status);
            }
        };
        jQuery.ajax(query);
