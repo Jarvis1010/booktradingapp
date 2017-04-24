@@ -50,9 +50,7 @@ export default class ProfilePage extends React.Component{
        return(
             <div>
                 {page}
-                <Profile name={this.state.name} username={this.state.username} 
-                    email={this.state.email} location={this.state.location} 
-                    saveProfile={this._saveChanges}/>
+                <Profile {...this.state} saveProfile={this._saveChanges}/>
            </div>
         ); 
     }

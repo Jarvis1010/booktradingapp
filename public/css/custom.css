@@ -7,3 +7,6 @@
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+.has-error{
+    color:red;
+}

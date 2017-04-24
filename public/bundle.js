@@ -34996,6 +34996,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -35084,9 +35086,7 @@ var ProfilePage = function (_React$Component) {
                 'div',
                 null,
                 page,
-                _react2.default.createElement(_profile2.default, { name: this.state.name, username: this.state.username,
-                    email: this.state.email, location: this.state.location,
-                    saveProfile: this._saveChanges })
+                _react2.default.createElement(_profile2.default, _extends({}, this.state, { saveProfile: this._saveChanges }))
             );
         }
     }]);
@@ -35099,37 +35099,7 @@ exports.default = ProfilePage;
 },{"./profile":263,"jquery":2,"jwt-decode":5,"react":255,"react-router-dom":171}],263:[function(require,module,exports){
 'use strict';
 
-var _typeof8 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _typeof7 = typeof Symbol === "function" && _typeof8(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof8(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof8(obj);
-};
-
-var _typeof6 = typeof Symbol === "function" && _typeof7(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof7(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof7(obj);
-};
-
-var _typeof5 = typeof Symbol === "function" && _typeof6(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof6(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof6(obj);
-};
-
-var _typeof4 = typeof Symbol === "function" && _typeof5(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof5(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof5(obj);
-};
-
-var _typeof3 = typeof Symbol === "function" && _typeof4(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof4(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof4(obj);
-};
+var _typeof3 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _typeof2 = typeof Symbol === "function" && _typeof3(Symbol.iterator) === "symbol" ? function (obj) {
     return typeof obj === "undefined" ? "undefined" : _typeof3(obj);
@@ -35212,8 +35182,8 @@ var Profile = function (_React$Component) {
         value: function _handleChange(e) {
             var _setState;
 
+            e.preventDefault();
             this.setState((_setState = {}, _defineProperty(_setState, e.target.name, e.target.value), _defineProperty(_setState, 'changed', true), _setState));
-            console.log(_defineProperty({}, e.target.name, e.target.value));
         }
     }, {
         key: '_cancel',
@@ -35232,21 +35202,36 @@ var Profile = function (_React$Component) {
         key: '_saveChanges',
         value: function _saveChanges(e) {
             e.preventDefault();
-            this.props.saveProfile(this.state);
+            if (this._validateEmail(this.state.email)) {
+                this.props.saveProfile(this.state);
+            } else {
+                console.log("invalid email");
+            }
+        }
+    }, {
+        key: '_validateEmail',
+        value: function _validateEmail(value) {
+            // regex from http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(value);
         }
     }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(props) {
-            this.setState(props);
+            if (!this.state.hasOwnProperty('email')) {
+                this.setState(props);
+            }
         }
     }, {
         key: 'render',
         value: function render() {
             var buttons = void 0;
             if (this.state.changed) {
-                buttons = _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12 padded' }, _react2.default.createElement('button', { onClick: this._cancel, className: 'btn btn-default pull-right' }, 'Cancel'), _react2.default.createElement('button', { onClick: this._saveChanges, className: 'btn btn-success pull-right' }, 'Save Changes'));
+                buttons = _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12 padded' }, _react2.default.createElement('button', { onClick: this._cancel, className: 'btn btn-default pull-right' }, 'Cancel'), _react2.default.createElement('button', { type: 'submit', onClick: this._saveChanges, className: 'btn btn-success pull-right' }, 'Save Changes'));
             }
-            return _react2.default.createElement('div', null, _react2.default.createElement('header', { className: 'row' }, _react2.default.createElement('h1', { className: 'text-center' }, 'Profile Page')), _react2.default.createElement('form', { onChange: this._handleChange, className: 'row' }, _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12' }, _react2.default.createElement('h2', { className: 'text-center' }, _react2.default.createElement('input', { name: 'name', type: 'text', className: 'transparent text-center', value: this.state.name, placeholder: 'Enter your name' })), _react2.default.createElement('h3', { className: 'text-center' }, this.state.username), _react2.default.createElement('hr', null)), _react2.default.createElement('h4', { className: 'col-md-3 col-md-offset-3 col-xs-12 text-center' }, _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker' }), _react2.default.createElement('input', { name: 'location', type: 'text', className: 'transparent text-center', value: this.state.location, placeholder: 'Enter your City, State' })), _react2.default.createElement('h4', { className: 'col-md-3 col-xs-12 text-center' }, _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope' }), _react2.default.createElement('input', { required: true, name: 'email', type: 'email', className: 'transparent text-center', value: this.state.email, placeholder: 'Enter your Email' })), buttons));
+            var warning = this._validateEmail(this.state.email) ? '' : 'has-error';
+
+            return _react2.default.createElement('div', null, _react2.default.createElement('header', { className: 'row' }, _react2.default.createElement('h1', { className: 'text-center' }, 'Profile Page')), _react2.default.createElement('form', { onChange: this._handleChange, className: 'row' }, _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12' }, _react2.default.createElement('h3', { className: 'text-center' }, _react2.default.createElement('input', { name: 'name', type: 'text', className: 'transparent text-center', value: this.state.name, placeholder: 'Enter your name' })), _react2.default.createElement('p', { className: 'text-center' }, this.state.username), _react2.default.createElement('hr', null)), _react2.default.createElement('p', { className: 'col-md-3 col-md-offset-3 col-xs-12 text-center' }, _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker' }), _react2.default.createElement('input', { name: 'location', type: 'text', className: 'transparent text-center', value: this.state.location, placeholder: 'Enter your City, State' })), _react2.default.createElement('p', { className: 'col-md-3 col-xs-12 text-center' }, _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope ' + warning }), _react2.default.createElement('input', { required: true, name: 'email', type: 'email', className: 'transparent text-center ' + warning, value: this.state.email, placeholder: 'Enter your Email' })), buttons));
         }
     }]);
 

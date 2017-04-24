@@ -10,8 +10,8 @@ export default class Profile extends React.Component{
         this._saveChanges=this._saveChanges.bind(this);
     }
     _handleChange(e){
+        e.preventDefault()
         this.setState({[e.target.name]:e.target.value,changed:true});
-        console.log({[e.target.name]:e.target.value});
     }
     _cancel(e){
         e.preventDefault();
@@ -26,10 +26,21 @@ export default class Profile extends React.Component{
     }
     _saveChanges(e){
          e.preventDefault();
-         this.props.saveProfile(this.state);
+         if(this._validateEmail(this.state.email)){
+            this.props.saveProfile(this.state);
+         }else{
+             console.log("invalid email");
+         }
     }
+    _validateEmail(value) {
+    // regex from http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(value);
+  }
     componentWillReceiveProps(props){
-        this.setState(props);
+        if(!this.state.hasOwnProperty('email')){
+            this.setState(props);
+        }    
     }
     render(){
             let buttons;
@@ -37,10 +48,12 @@ export default class Profile extends React.Component{
                buttons=(
                     <div className="col-md-6 col-md-offset-3 col-xs-12 padded">
                         <button onClick={this._cancel} className="btn btn-default pull-right">Cancel</button>
-                        <button onClick={this._saveChanges} className="btn btn-success pull-right">Save Changes</button>
+                        <button type="submit" onClick={this._saveChanges} className="btn btn-success pull-right">Save Changes</button>
                     </div>
                 ); 
             }
+            let warning = this._validateEmail(this.state.email) ? '':'has-error';
+        
         return(
             <div>
                 <header className="row">
@@ -48,20 +61,20 @@ export default class Profile extends React.Component{
                 </header>
                 <form onChange={this._handleChange} className="row">
                   <div className="col-md-6 col-md-offset-3 col-xs-12">
-                      <h2 className="text-center">
+                      <h3 className="text-center">
                         <input name="name" type="text" className="transparent text-center" value={this.state.name} placeholder="Enter your name"/>
-                      </h2>
-                      <h3 className="text-center">{this.state.username}</h3>
+                      </h3>
+                      <p className="text-center">{this.state.username}</p>
                       <hr/>
                   </div>
-                    <h4 className="col-md-3 col-md-offset-3 col-xs-12 text-center">
+                    <p className="col-md-3 col-md-offset-3 col-xs-12 text-center">
                         <span className="glyphicon glyphicon-map-marker"></span>
                         <input name="location" type="text" className="transparent text-center" value={this.state.location} placeholder="Enter your City, State"/>
-                    </h4>
-                    <h4 className="col-md-3 col-xs-12 text-center">
-                        <span className="glyphicon glyphicon-envelope"></span>
-                        <input required name="email" type="email" className="transparent text-center" value={this.state.email} placeholder="Enter your Email"/ >
-                    </h4>
+                    </p>
+                    <p className="col-md-3 col-xs-12 text-center">
+                        <span className={`glyphicon glyphicon-envelope ${warning}`}></span>
+                        <input required name="email" type="email" className={`transparent text-center ${warning}`} value={this.state.email} placeholder="Enter your Email"/ >
+                    </p>
                     {buttons}
                 </form>
             </div>    
