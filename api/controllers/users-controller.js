@@ -63,3 +63,16 @@ module.exports.authenticate=function(req,res,next){
         res.status(403).json("no token provided")
     }
 };
+
+module.exports.profile=function(req,res){
+    User.findOne({username:req.user})
+        .exec((err,user)=>{
+            if(err||user==null){
+                res.status(400).json(err);
+            }else{
+                var profile=user;
+                delete profile.password;
+                res.json(profile);
+            }
+        });
+};
