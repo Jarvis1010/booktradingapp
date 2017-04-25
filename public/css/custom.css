@@ -1,5 +1,20 @@
+#myapp,.no-margin{
+    padding:0;
+    margin:0;
+    border:0;
+    width:100%;
+}
+nav{
+    margin-left:-17px;
+    margin-right:-17px;
+}
 .padded{
     padding-top:20px;
+}
+.no-padding{
+    padding:0px;
+    margin-top:8px;
+    margin-bottom:0px;
 }
 .transparent{
     background-color:transparent;
@@ -9,4 +24,22 @@
 }
 .has-error{
     color:red;
+}
+.special-font{
+    font-family: 'Eagle Lake', cursive;
+}
+.main-header{
+    background-image: url("/img/library.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: AliceBlue;
+    padding-top:1%;
+    padding-bottom:19%;
+    margin-top:-20px;
+}
+.main-header>h1{
+    margin-top:0;
+    font-size:80px;
+    color:black;
 }

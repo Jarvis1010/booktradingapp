@@ -21,11 +21,11 @@ export default class LoginForm extends React.Component{
         return(
             <form onChange={this._handleChange} onSubmit={this._login} className="navbar-form navbar-right">
                   <div className="form-group">
-                    <label className="sr-only" for="username">Username</label>
+                    <label className="sr-only" htmlFor="username">Username</label>
                     <input required name ="username" type="text" className="form-control" id="username" placeholder="Username"/>
                   </div>
                   <div className="form-group">
-                    <label className="sr-only" for="password">Password</label>
+                    <label className="sr-only" htmlFor="password">Password</label>
                     <input required name="password" type="password" className="form-control" id="password" placeholder="Password"/>
                   </div>
                   <button className="btn btn-default">Sign in</button>

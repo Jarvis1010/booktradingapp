@@ -59,16 +59,13 @@ export default class Layout extends React.Component{
     }
     
     render(){
-        <NavBar login={this._login}/>
         return(
             <Router>
-                <div>
+                <div className="container-fluid">
                     <NavBar {...this.state} login={this._login}/>
-                    <div className="container">
-                        <Route exact={true} path="/" render={()=>{return <MainPage {...this.state}/>;}}/>
-            			<Route path="/register" render={()=>{return <RegisterPage {...this.state}/>;}}/>
-            			<Route path="/profile" render={()=>{return <ProfilePage {...this.state}/>;}}/>
-                    </div>
+                    <Route exact={true} path="/" render={()=>{return <MainPage {...this.state}/>;}}/>
+        			<Route path="/register" render={()=>{return <RegisterPage {...this.state}/>;}}/>
+        			<Route path="/profile" render={()=>{return <ProfilePage {...this.state}/>;}}/>
                 </div>
             </Router>    
         );

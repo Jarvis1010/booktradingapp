@@ -60,7 +60,7 @@ export default class Profile extends React.Component{
         return(
             <div>
                 <header className="row">
-                    <h1 className="text-center">Profile Page</h1>
+                    <h1 className="text-center special-font">Profile Page</h1>
                 </header>
                 <form onChange={this._handleChange} className="row">
                   <div className="col-md-6 col-md-offset-3 col-xs-12">

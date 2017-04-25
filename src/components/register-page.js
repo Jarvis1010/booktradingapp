@@ -45,6 +45,7 @@ export default class LoginForm extends React.Component{
     render(){
         var message;
         var form;
+        
         if(this.state.message){
             message=(<Message message={this.state.message}/>);
         }else if(this.state.error){
@@ -56,19 +57,19 @@ export default class LoginForm extends React.Component{
                 <section className="row">
                     <form onSubmit={this._handleClick} onChange={this._handleChange} name="register" className="col-md-6 col-md-offset-3 col-xs-12">
                         <div className="form-group">
-                            <label for="username">Username</label>
+                            <label htmlFor="username">Username</label>
                             <input required type="username" className="form-control" id="username" name="username" placeholder="Username" autoCapitalize="none"/>
                         </div> 
                         <div className="form-group">
-                            <label for="email">Email</label>
+                            <label htmlFor="email">Email</label>
                             <input required type="email" className="form-control" id="email" name="email" placeholder="Email" autoCapitalize="none"/>
                         </div>
                         <div className="form-group">
-                            <label for="password">Password</label>
+                            <label htmlFor="password">Password</label>
                             <input required type="password" className="form-control" id="password" name="password" placeholder="Password" autoCapitalize="none"/>
                         </div>
                         <div className="form-group">
-                            <label for="password-repeat">Repeat Password</label>
+                            <label htmlFor="password-repeat">Repeat Password</label>
                             <input required type="password" className="form-control" id="password-repeat" name="passwordRepeat" placeholder="Password" autoCapitalize="none"/>
                         </div>
                         <button className="btn btn-success">Register</button>
@@ -80,7 +81,7 @@ export default class LoginForm extends React.Component{
         return(
             <div>
                 <header className="row">
-                    <h1 className="col-md-6 col-md-offset-3 col-xs-12 text-center">Register</h1>
+                    <h1 className="col-md-6 col-md-offset-3 col-xs-12 text-center special-font">Register</h1>
                 </header>
                 {form}
                 <div className="row padded">
