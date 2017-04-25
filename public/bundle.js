@@ -34854,11 +34854,63 @@ exports.default = Message;
 },{"react":255}],261:[function(require,module,exports){
 "use strict";
 
+var _typeof8 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _typeof7 = typeof Symbol === "function" && _typeof8(Symbol.iterator) === "symbol" ? function (obj) {
+	return typeof obj === "undefined" ? "undefined" : _typeof8(obj);
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof8(obj);
+};
+
+var _typeof6 = typeof Symbol === "function" && _typeof7(Symbol.iterator) === "symbol" ? function (obj) {
+	return typeof obj === "undefined" ? "undefined" : _typeof7(obj);
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof7(obj);
+};
+
+var _typeof5 = typeof Symbol === "function" && _typeof6(Symbol.iterator) === "symbol" ? function (obj) {
+	return typeof obj === "undefined" ? "undefined" : _typeof6(obj);
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof6(obj);
+};
+
+var _typeof4 = typeof Symbol === "function" && _typeof5(Symbol.iterator) === "symbol" ? function (obj) {
+	return typeof obj === "undefined" ? "undefined" : _typeof5(obj);
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof5(obj);
+};
+
+var _typeof3 = typeof Symbol === "function" && _typeof4(Symbol.iterator) === "symbol" ? function (obj) {
+	return typeof obj === "undefined" ? "undefined" : _typeof4(obj);
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof4(obj);
+};
+
+var _typeof2 = typeof Symbol === "function" && _typeof3(Symbol.iterator) === "symbol" ? function (obj) {
+	return typeof obj === "undefined" ? "undefined" : _typeof3(obj);
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof3(obj);
+};
+
+var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+	return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+} : function (obj) {
+	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+};
+
 Object.defineProperty(exports, "__esModule", {
-		value: true
+	value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+	function defineProperties(target, props) {
+		for (var i = 0; i < props.length; i++) {
+			var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+		}
+	}return function (Constructor, protoProps, staticProps) {
+		if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	};
+}();
 
 var _react = require("react");
 
@@ -34870,121 +34922,63 @@ var _loginForm2 = _interopRequireDefault(_loginForm);
 
 var _reactRouterDom = require("react-router-dom");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { default: obj };
+}
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+	if (!(instance instanceof Constructor)) {
+		throw new TypeError("Cannot call a class as a function");
+	}
+}
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _possibleConstructorReturn(self, call) {
+	if (!self) {
+		throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	}return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) {
+	if (typeof superClass !== "function" && superClass !== null) {
+		throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+	}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
 
 var NavBar = function (_React$Component) {
-		_inherits(NavBar, _React$Component);
+	_inherits(NavBar, _React$Component);
 
-		function NavBar() {
-				_classCallCheck(this, NavBar);
+	function NavBar() {
+		_classCallCheck(this, NavBar);
 
-				return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).apply(this, arguments));
+		return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).apply(this, arguments));
+	}
+
+	_createClass(NavBar, [{
+		key: "_logout",
+		value: function _logout(e) {
+			e.preventDefault();
+			delete window.sessionStorage.token;
+			location.path('/');
 		}
+	}, {
+		key: "render",
+		value: function render() {
 
-		_createClass(NavBar, [{
-				key: "_logout",
-				value: function _logout(e) {
-						e.preventDefault();
-						delete window.sessionStorage.token;
-						location.path('/');
-				}
-		}, {
-				key: "render",
-				value: function render() {
+			var navBarHeader = _react2.default.createElement("div", { className: "navbar-header" }, _react2.default.createElement("button", { type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#collapse-1", "aria-expanded": "false" }, _react2.default.createElement("span", { className: "sr-only" }, "Toggle navigation"), _react2.default.createElement("span", { className: "icon-bar" }), _react2.default.createElement("span", { className: "icon-bar" }), _react2.default.createElement("span", { className: "icon-bar" })), _react2.default.createElement(_reactRouterDom.Link, { className: "navbar-brand", to: "/" }, "BookSwap"));
 
-						var navBarHeader = _react2.default.createElement(
-								"div",
-								{ className: "navbar-header" },
-								_react2.default.createElement(
-										"button",
-										{ type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#collapse-1", "aria-expanded": "false" },
-										_react2.default.createElement(
-												"span",
-												{ className: "sr-only" },
-												"Toggle navigation"
-										),
-										_react2.default.createElement("span", { className: "icon-bar" }),
-										_react2.default.createElement("span", { className: "icon-bar" }),
-										_react2.default.createElement("span", { className: "icon-bar" })
-								),
-								_react2.default.createElement(
-										_reactRouterDom.Link,
-										{ className: "navbar-brand", to: "/" },
-										"BookSwap"
-								)
-						);
+			var navRight = _react2.default.createElement("form", { onSubmit: this._logout.bind(this), className: "navbar-form navbar-right" }, _react2.default.createElement("label", { className: "navbar-text" }, "Welcome ", this.props.userName), _react2.default.createElement("button", { className: "btn btn-primary" }, "Logout"));
+			var navLeft = _react2.default.createElement("ul", { className: "nav navbar-nav" }, _react2.default.createElement("li", { className: window.location.hash == "#/profile" && "active" }, _react2.default.createElement(_reactRouterDom.Link, { to: "/profile" }, "Profile")), _react2.default.createElement("li", { className: window.location.hash == "#/mybooks" && "active" }, _react2.default.createElement(_reactRouterDom.Link, { to: "/mybooks" }, "My Books")));
 
-						var navRight = _react2.default.createElement(
-								"div",
-								{ className: "navbar-form navbar-right" },
-								_react2.default.createElement(
-										"p",
-										{ className: "navbar-text" },
-										"Welcome ",
-										this.props.userName
-								),
-								_react2.default.createElement(
-										"button",
-										{ onClick: this._logout.bind(this), className: "btn btn-primary" },
-										"Logout"
-								)
-						);
-						var navLeft = _react2.default.createElement(
-								"li",
-								null,
-								_react2.default.createElement(
-										_reactRouterDom.Link,
-										{ to: "/profile" },
-										"Profile"
-								)
-						);
+			if (!this.props.isLoggedIn) {
+				navRight = _react2.default.createElement(_loginForm2.default, { login: this.props.login });
+				navLeft = _react2.default.createElement("ul", { className: "nav navbar-nav" }, _react2.default.createElement("li", { className: window.location.hash == "#/register" && "active" }, _react2.default.createElement(_reactRouterDom.Link, { to: "/register" }, "Register")));
+			}
 
-						if (!this.props.isLoggedIn) {
-								navRight = _react2.default.createElement(_loginForm2.default, { login: this.props.login });
-								navLeft = _react2.default.createElement(
-										"li",
-										null,
-										_react2.default.createElement(
-												_reactRouterDom.Link,
-												{ to: "/register" },
-												"Register"
-										)
-								);
-						}
+			return _react2.default.createElement("div", { className: "container-fluid" }, _react2.default.createElement("nav", { className: "navbar navbar-default" }, _react2.default.createElement("div", { className: "container-fluid" }, navBarHeader, _react2.default.createElement("div", { className: "collapse navbar-collapse", id: "collapse-1" }, navLeft, navRight))));
+		}
+	}]);
 
-						return _react2.default.createElement(
-								"div",
-								{ className: "container-fluid" },
-								_react2.default.createElement(
-										"nav",
-										{ className: "navbar navbar-default" },
-										_react2.default.createElement(
-												"div",
-												{ className: "container-fluid" },
-												navBarHeader,
-												_react2.default.createElement(
-														"div",
-														{ className: "collapse navbar-collapse", id: "collapse-1" },
-														_react2.default.createElement(
-																"ul",
-																{ className: "nav navbar-nav" },
-																navLeft
-														),
-														navRight
-												)
-										)
-								)
-						);
-				}
-		}]);
-
-		return NavBar;
+	return NavBar;
 }(_react2.default.Component);
 
 exports.default = NavBar;
@@ -35123,67 +35117,25 @@ exports.default = ProfilePage;
 },{"./profile":263,"jquery":2,"jwt-decode":5,"react":255,"react-router-dom":171}],263:[function(require,module,exports){
 'use strict';
 
-var _typeof3 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _typeof2 = typeof Symbol === "function" && _typeof3(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof3(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof3(obj);
-};
-
-var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-};
-
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () {
-    function defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-        }
-    }return function (Constructor, protoProps, staticProps) {
-        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-    };
-}();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) {
-    if (key in obj) {
-        Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-    } else {
-        obj[key] = value;
-    }return obj;
-}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-    }
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) {
-    if (!self) {
-        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-}
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Profile = function (_React$Component) {
     _inherits(Profile, _React$Component);
@@ -35254,11 +35206,68 @@ var Profile = function (_React$Component) {
         value: function render() {
             var buttons = void 0;
             if (this.state.changed) {
-                buttons = _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12 padded' }, _react2.default.createElement('button', { onClick: this._cancel, className: 'btn btn-default pull-right' }, 'Cancel'), _react2.default.createElement('button', { onClick: this._saveChanges, className: 'btn btn-success pull-right' }, 'Save Changes'));
+                buttons = _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-6 col-md-offset-3 col-xs-12 padded' },
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this._cancel, className: 'btn btn-default pull-right' },
+                        'Cancel'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this._saveChanges, className: 'btn btn-success pull-right' },
+                        'Save Changes'
+                    )
+                );
             }
             var warning = this._validateEmail(this.state.email) ? '' : 'has-error';
 
-            return _react2.default.createElement('div', null, _react2.default.createElement('header', { className: 'row' }, _react2.default.createElement('h1', { className: 'text-center' }, 'Profile Page')), _react2.default.createElement('form', { onChange: this._handleChange, className: 'row' }, _react2.default.createElement('div', { className: 'col-md-6 col-md-offset-3 col-xs-12' }, _react2.default.createElement('h3', { className: 'text-center' }, _react2.default.createElement('input', { name: 'name', type: 'text', className: 'transparent text-center', value: this.state.name, placeholder: 'Enter your name' })), _react2.default.createElement('p', { className: 'text-center' }, this.state.username), _react2.default.createElement('hr', null)), _react2.default.createElement('p', { className: 'col-md-3 col-md-offset-3 col-xs-12 text-center' }, _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker' }), _react2.default.createElement('input', { name: 'location', type: 'text', className: 'transparent text-center', value: this.state.location, placeholder: 'Enter your City, State' })), _react2.default.createElement('p', { className: 'col-md-3 col-xs-12 text-center' }, _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope ' + warning }), _react2.default.createElement('input', { required: true, name: 'email', type: 'email', className: 'transparent text-center ' + warning, value: this.state.email, placeholder: 'Enter your Email' })), buttons));
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'header',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'text-center' },
+                        'Profile Page'
+                    )
+                ),
+                _react2.default.createElement(
+                    'form',
+                    { onChange: this._handleChange, className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-md-6 col-md-offset-3 col-xs-12' },
+                        _react2.default.createElement(
+                            'h3',
+                            { className: 'text-center' },
+                            _react2.default.createElement('input', { name: 'name', type: 'text', className: 'transparent text-center', value: this.state.name, placeholder: 'Enter your name' })
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'text-center' },
+                            this.state.username
+                        ),
+                        _react2.default.createElement('hr', null)
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        { className: 'col-md-3 col-md-offset-3 col-xs-12 text-center' },
+                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker' }),
+                        _react2.default.createElement('input', { name: 'location', type: 'text', className: 'transparent text-center', value: this.state.location, placeholder: 'Enter your City, State' })
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        { className: 'col-md-3 col-xs-12 text-center' },
+                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope ' + warning }),
+                        _react2.default.createElement('input', { required: true, name: 'email', type: 'email', className: 'transparent text-center ' + warning, value: this.state.email, placeholder: 'Enter your Email' })
+                    ),
+                    buttons
+                )
+            );
         }
     }]);
 
