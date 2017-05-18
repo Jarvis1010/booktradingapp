@@ -4,8 +4,9 @@
   "description": "App that lets users offer and accept book trades",
   "main": "app.js",
   "scripts": {
-    "run": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create:component": "componentinator path=./src/components"
   },
   "author": "Justin Travis Mair",
   "license": "ISC",
@@ -26,11 +27,13 @@
     "babel-preset-react": "^6.24.1",
     "babelify": "^7.3.0",
     "browserify": "^14.3.0",
+    "component-inator": "^2.0.0",
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
     "jwt-decode": "^2.2.0",
     "nodemon": "^1.11.0",
     "react": "^15.5.4",
+    "react-component-inator": "^1.0.0",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",

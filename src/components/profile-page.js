@@ -1,7 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import jQuery from 'jquery';
 
 import Profile from './profile';
 
@@ -21,24 +20,22 @@ export default class ProfilePage extends React.Component{
     }
     _saveChanges(profile){
         delete profile.changed;
-        
-        let query={
-           method:"POST",
-           url:"/api/profile",
-           data:profile,
-           beforeSend:(xhr)=>{
-               xhr.setRequestHeader('Authorization',"Bearer "+ window.sessionStorage.token);
-           },
-           success:(res)=>{
-               this.setState(res);
-           },
-           error:(err)=>{
-               console.log(err.message);
-               this._checkAuth(err.status);
-           }
-       };
        
-       jQuery.ajax(query);
+       fetch('/api/profile', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization':'Bearer '+window.sessionStorage.token
+            }, 
+            body:JSON.stringify(profile)
+        })
+        .then(res=>res.ok?res.json():Promise.reject(res))
+        .then((res)=>{
+                this.setState(res);
+            })
+        .catch(err=>console.log("Error: ",err));
+       
     }
     _checkAuth(status){
        if(status===401||status===403){
@@ -46,20 +43,22 @@ export default class ProfilePage extends React.Component{
         } 
     }
    componentWillMount(){
-       let query={
-           url:"/api/profile",
-           beforeSend:(xhr)=>{
-               xhr.setRequestHeader('Authorization',"Bearer "+ window.sessionStorage.token);
-           },
-           success:(res)=>{
-               this.setState(res);
-           },
-           error:(err)=>{
+       fetch('/api/profile', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization':'Bearer '+window.sessionStorage.token
+            }
+        })
+        .then(res=>res.ok?res.json():Promise.reject(res))
+        .then((res)=>{
+                this.setState(res);
+            })
+        .catch((err)=>{
                console.log(err.message);
                this._checkAuth(err.status);
-           }
-       };
-       jQuery.ajax(query);
+           });
    }
     render(){
        let page;
@@ -70,7 +69,7 @@ export default class ProfilePage extends React.Component{
        return(
             <div>
                 {page}
-                <Profile {...this.state} saveProfile={this._saveChanges}/>
+                {this.state._id!='' && <Profile {...this.state} saveProfile={this._saveChanges}/>}
            </div>
         ); 
     }

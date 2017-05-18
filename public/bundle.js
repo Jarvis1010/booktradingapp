@@ -34580,10 +34580,6 @@ var _navBar = require('./nav-bar');
 
 var _navBar2 = _interopRequireDefault(_navBar);
 
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
 var _jwtDecode = require('jwt-decode');
 
 var _jwtDecode2 = _interopRequireDefault(_jwtDecode);
@@ -34643,23 +34639,21 @@ var Layout = function (_React$Component) {
         value: function _login(obj) {
             var _this2 = this;
 
-            var query = {
-                method: "POST",
-                url: "/api/login",
-                data: obj,
-                success: function success(res) {
-                    window.sessionStorage.token = res.token;
-                    _this2._authenticate();
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
                 },
-                error: function error(err) {
-                    console.log(err.message);
-                    if (err.status === 401 || err.status === 403) {
-                        delete window.sessionStorage.token;
-                    }
-                }
-            };
-
-            _jquery2.default.ajax(query);
+                body: JSON.stringify(obj)
+            }).then(function (res) {
+                return res.ok ? res.json() : Promise.reject(res);
+            }).then(function (res) {
+                window.sessionStorage.token = res.token;
+                _this2._authenticate();
+            }).catch(function (err) {
+                return console.log("Error: ", err);
+            });
         }
     }, {
         key: 'componentWillMount',
@@ -34685,7 +34679,7 @@ var Layout = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     'div',
-                    { className: 'container-fluid' },
+                    { className: 'container-fluid layout' },
                     _react2.default.createElement(_navBar2.default, _extends({}, this.state, { login: this._login })),
                     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
                             return _react2.default.createElement(_mainPage2.default, _this4.state);
@@ -34706,7 +34700,7 @@ var Layout = function (_React$Component) {
 
 exports.default = Layout;
 
-},{"./main-page":260,"./nav-bar":263,"./profile-page":264,"./register-page":266,"jquery":2,"jwt-decode":5,"react":255,"react-router-dom":171}],259:[function(require,module,exports){
+},{"./main-page":260,"./nav-bar":263,"./profile-page":264,"./register-page":266,"jwt-decode":5,"react":255,"react-router-dom":171}],259:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34861,9 +34855,447 @@ var MainPage = function (_React$Component) {
 exports.default = MainPage;
 
 },{"./dash-board":257,"./main":261,"react":255}],261:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Main = function (_React$Component) {
+    _inherits(Main, _React$Component);
+
+    function Main() {
+        _classCallCheck(this, Main);
+
+        return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+    }
+
+    _createClass(Main, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: '' },
+                _react2.default.createElement(
+                    'header',
+                    { className: 'row main-header' },
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'text-center special-font' },
+                        'Book Swap'
+                    ),
+                    _react2.default.createElement(
+                        'h3',
+                        { className: 'text-center' },
+                        _react2.default.createElement(
+                            _reactRouterDom.Link,
+                            { to: '/register' },
+                            'Register'
+                        ),
+                        ' now to start trading books'
+                    )
+                ),
+                _react2.default.createElement('section', { className: 'row' })
+            );
+        }
+    }]);
+
+    return Main;
+}(_react2.default.Component);
+
+exports.default = Main;
+
+},{"react":255,"react-router-dom":171}],262:[function(require,module,exports){
 "use strict";
 
-var _typeof15 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Message = function (_React$Component) {
+    _inherits(Message, _React$Component);
+
+    function Message() {
+        _classCallCheck(this, Message);
+
+        return _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).apply(this, arguments));
+    }
+
+    _createClass(Message, [{
+        key: "render",
+        value: function render() {
+            var alert = this.props.error ? "alert alert-danger" : "alert alert-success";
+            return _react2.default.createElement(
+                "div",
+                { className: "col-md-6 col-md-offset-3 col-xs-12 " + alert, role: "alert" },
+                this.props.error || this.props.message
+            );
+        }
+    }]);
+
+    return Message;
+}(_react2.default.Component);
+
+exports.default = Message;
+
+},{"react":255}],263:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _loginForm = require('./login-form');
+
+var _loginForm2 = _interopRequireDefault(_loginForm);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NavBar = function (_React$Component) {
+  _inherits(NavBar, _React$Component);
+
+  function NavBar() {
+    _classCallCheck(this, NavBar);
+
+    return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).apply(this, arguments));
+  }
+
+  _createClass(NavBar, [{
+    key: '_logout',
+    value: function _logout(e) {
+      e.preventDefault();
+      delete window.sessionStorage.token;
+      window.location.replace("/#");
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var navBarHeader = _react2.default.createElement(
+        'div',
+        { className: 'navbar-header' },
+        _react2.default.createElement(
+          'button',
+          {
+            type: 'button',
+            className: 'navbar-toggle collapsed',
+            'data-toggle': 'collapse',
+            'data-target': '#collapse-1',
+            'aria-expanded': 'false'
+          },
+          _react2.default.createElement(
+            'span',
+            { className: 'sr-only' },
+            'Toggle navigation'
+          ),
+          _react2.default.createElement('span', { className: 'icon-bar' }),
+          _react2.default.createElement('span', { className: 'icon-bar' }),
+          _react2.default.createElement('span', { className: 'icon-bar' })
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { className: 'navbar-brand special-font', to: '/' },
+          'BookSwap'
+        )
+      );
+
+      var navRight = _react2.default.createElement(
+        'form',
+        {
+          onSubmit: this._logout.bind(this),
+          className: 'navbar-form navbar-right'
+        },
+        _react2.default.createElement(
+          'label',
+          { className: 'navbar-text no-padding' },
+          'Welcome back ',
+          this.props.userName
+        ),
+        _react2.default.createElement(
+          'button',
+          { className: 'btn btn-primary' },
+          'Logout'
+        )
+      );
+
+      var navLeft = _react2.default.createElement(
+        'ul',
+        { className: 'nav navbar-nav' },
+        _react2.default.createElement(
+          'li',
+          { className: window.location.hash == '#/profile' && 'active' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/profile' },
+            'Profile'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          { className: window.location.hash == '#/mybooks' && 'active' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/mybooks' },
+            'My Books'
+          )
+        )
+      );
+
+      if (!this.props.isLoggedIn) {
+        navRight = _react2.default.createElement(_loginForm2.default, { login: this.props.login });
+        navLeft = _react2.default.createElement(
+          'ul',
+          { className: 'nav navbar-nav' },
+          _react2.default.createElement(
+            'li',
+            { className: window.location.hash == '#/register' && 'active' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/register' },
+              'Register'
+            )
+          )
+        );
+      }
+
+      return _react2.default.createElement(
+        'nav',
+        { className: 'navbar navbar-default container-fluid', role: 'navigation' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          navBarHeader,
+          _react2.default.createElement(
+            'div',
+            { className: 'collapse navbar-collapse', id: 'collapse-1' },
+            navLeft,
+            navRight
+          )
+        )
+      );
+    }
+  }]);
+
+  return NavBar;
+}(_react2.default.Component);
+
+exports.default = NavBar;
+
+},{"./login-form":259,"react":255,"react-router-dom":171}],264:[function(require,module,exports){
+'use strict';
+
+var _typeof43 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _typeof42 = typeof Symbol === "function" && _typeof43(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof43(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof43(obj);
+};
+
+var _typeof41 = typeof Symbol === "function" && _typeof42(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof42(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof42(obj);
+};
+
+var _typeof40 = typeof Symbol === "function" && _typeof41(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof41(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof41(obj);
+};
+
+var _typeof39 = typeof Symbol === "function" && _typeof40(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof40(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof40(obj);
+};
+
+var _typeof38 = typeof Symbol === "function" && _typeof39(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof39(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof39(obj);
+};
+
+var _typeof37 = typeof Symbol === "function" && _typeof38(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof38(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof38(obj);
+};
+
+var _typeof36 = typeof Symbol === "function" && _typeof37(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof37(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof37(obj);
+};
+
+var _typeof35 = typeof Symbol === "function" && _typeof36(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof36(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof36(obj);
+};
+
+var _typeof34 = typeof Symbol === "function" && _typeof35(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof35(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof35(obj);
+};
+
+var _typeof33 = typeof Symbol === "function" && _typeof34(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof34(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof34(obj);
+};
+
+var _typeof32 = typeof Symbol === "function" && _typeof33(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof33(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof33(obj);
+};
+
+var _typeof31 = typeof Symbol === "function" && _typeof32(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof32(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof32(obj);
+};
+
+var _typeof30 = typeof Symbol === "function" && _typeof31(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof31(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof31(obj);
+};
+
+var _typeof29 = typeof Symbol === "function" && _typeof30(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof30(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof30(obj);
+};
+
+var _typeof28 = typeof Symbol === "function" && _typeof29(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof29(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof29(obj);
+};
+
+var _typeof27 = typeof Symbol === "function" && _typeof28(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof28(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof28(obj);
+};
+
+var _typeof26 = typeof Symbol === "function" && _typeof27(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof27(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof27(obj);
+};
+
+var _typeof25 = typeof Symbol === "function" && _typeof26(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof26(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof26(obj);
+};
+
+var _typeof24 = typeof Symbol === "function" && _typeof25(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof25(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof25(obj);
+};
+
+var _typeof23 = typeof Symbol === "function" && _typeof24(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof24(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof24(obj);
+};
+
+var _typeof22 = typeof Symbol === "function" && _typeof23(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof23(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof23(obj);
+};
+
+var _typeof21 = typeof Symbol === "function" && _typeof22(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof22(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof22(obj);
+};
+
+var _typeof20 = typeof Symbol === "function" && _typeof21(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof21(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof21(obj);
+};
+
+var _typeof19 = typeof Symbol === "function" && _typeof20(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof20(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof20(obj);
+};
+
+var _typeof18 = typeof Symbol === "function" && _typeof19(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof19(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof19(obj);
+};
+
+var _typeof17 = typeof Symbol === "function" && _typeof18(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof18(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof18(obj);
+};
+
+var _typeof16 = typeof Symbol === "function" && _typeof17(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof17(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof17(obj);
+};
+
+var _typeof15 = typeof Symbol === "function" && _typeof16(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof16(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof16(obj);
+};
 
 var _typeof14 = typeof Symbol === "function" && _typeof15(Symbol.iterator) === "symbol" ? function (obj) {
     return typeof obj === "undefined" ? "undefined" : _typeof15(obj);
@@ -34953,6 +35385,16 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+                target[key] = source[key];
+            }
+        }
+    }return target;
+};
+
 var _createClass = function () {
     function defineProperties(target, props) {
         for (var i = 0; i < props.length; i++) {
@@ -34963,9 +35405,19 @@ var _createClass = function () {
     };
 }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _jwtDecode = require('jwt-decode');
+
+var _jwtDecode2 = _interopRequireDefault(_jwtDecode);
+
+var _profile = require('./profile');
+
+var _profile2 = _interopRequireDefault(_profile);
 
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
@@ -34988,243 +35440,6 @@ function _inherits(subClass, superClass) {
         throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
     }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
-
-var Main = function (_React$Component) {
-    _inherits(Main, _React$Component);
-
-    function Main() {
-        _classCallCheck(this, Main);
-
-        return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
-    }
-
-    _createClass(Main, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement("div", { className: "no-margin" }, _react2.default.createElement("header", { className: "row main-header" }, _react2.default.createElement("h1", { className: "text-center special-font" }, "Book Swap")), _react2.default.createElement("section", { className: "row" }));
-        }
-    }]);
-
-    return Main;
-}(_react2.default.Component);
-
-exports.default = Main;
-
-},{"react":255}],262:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Message = function (_React$Component) {
-    _inherits(Message, _React$Component);
-
-    function Message() {
-        _classCallCheck(this, Message);
-
-        return _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).apply(this, arguments));
-    }
-
-    _createClass(Message, [{
-        key: "render",
-        value: function render() {
-            var alert = this.props.error ? "alert alert-danger" : "alert alert-success";
-            return _react2.default.createElement(
-                "div",
-                { className: "col-md-6 col-md-offset-3 col-xs-12 " + alert, role: "alert" },
-                this.props.error || this.props.message
-            );
-        }
-    }]);
-
-    return Message;
-}(_react2.default.Component);
-
-exports.default = Message;
-
-},{"react":255}],263:[function(require,module,exports){
-"use strict";
-
-var _typeof8 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _typeof7 = typeof Symbol === "function" && _typeof8(Symbol.iterator) === "symbol" ? function (obj) {
-	return typeof obj === "undefined" ? "undefined" : _typeof8(obj);
-} : function (obj) {
-	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof8(obj);
-};
-
-var _typeof6 = typeof Symbol === "function" && _typeof7(Symbol.iterator) === "symbol" ? function (obj) {
-	return typeof obj === "undefined" ? "undefined" : _typeof7(obj);
-} : function (obj) {
-	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof7(obj);
-};
-
-var _typeof5 = typeof Symbol === "function" && _typeof6(Symbol.iterator) === "symbol" ? function (obj) {
-	return typeof obj === "undefined" ? "undefined" : _typeof6(obj);
-} : function (obj) {
-	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof6(obj);
-};
-
-var _typeof4 = typeof Symbol === "function" && _typeof5(Symbol.iterator) === "symbol" ? function (obj) {
-	return typeof obj === "undefined" ? "undefined" : _typeof5(obj);
-} : function (obj) {
-	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof5(obj);
-};
-
-var _typeof3 = typeof Symbol === "function" && _typeof4(Symbol.iterator) === "symbol" ? function (obj) {
-	return typeof obj === "undefined" ? "undefined" : _typeof4(obj);
-} : function (obj) {
-	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof4(obj);
-};
-
-var _typeof2 = typeof Symbol === "function" && _typeof3(Symbol.iterator) === "symbol" ? function (obj) {
-	return typeof obj === "undefined" ? "undefined" : _typeof3(obj);
-} : function (obj) {
-	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof3(obj);
-};
-
-var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
-	return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-} : function (obj) {
-	return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-};
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () {
-	function defineProperties(target, props) {
-		for (var i = 0; i < props.length; i++) {
-			var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-		}
-	}return function (Constructor, protoProps, staticProps) {
-		if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	};
-}();
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _loginForm = require("./login-form");
-
-var _loginForm2 = _interopRequireDefault(_loginForm);
-
-var _reactRouterDom = require("react-router-dom");
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { default: obj };
-}
-
-function _classCallCheck(instance, Constructor) {
-	if (!(instance instanceof Constructor)) {
-		throw new TypeError("Cannot call a class as a function");
-	}
-}
-
-function _possibleConstructorReturn(self, call) {
-	if (!self) {
-		throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	}return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-}
-
-function _inherits(subClass, superClass) {
-	if (typeof superClass !== "function" && superClass !== null) {
-		throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-	}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-
-var NavBar = function (_React$Component) {
-	_inherits(NavBar, _React$Component);
-
-	function NavBar() {
-		_classCallCheck(this, NavBar);
-
-		return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).apply(this, arguments));
-	}
-
-	_createClass(NavBar, [{
-		key: "_logout",
-		value: function _logout(e) {
-			e.preventDefault();
-			delete window.sessionStorage.token;
-			location.path('/');
-		}
-	}, {
-		key: "render",
-		value: function render() {
-
-			var navBarHeader = _react2.default.createElement("div", { className: "navbar-header" }, _react2.default.createElement("button", { type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#collapse-1", "aria-expanded": "false" }, _react2.default.createElement("span", { className: "sr-only" }, "Toggle navigation"), _react2.default.createElement("span", { className: "icon-bar" }), _react2.default.createElement("span", { className: "icon-bar" }), _react2.default.createElement("span", { className: "icon-bar" })), _react2.default.createElement(_reactRouterDom.Link, { className: "navbar-brand special-font", to: "/" }, "BookSwap"));
-
-			var navRight = _react2.default.createElement("form", { onSubmit: this._logout.bind(this), className: "navbar-form navbar-right" }, _react2.default.createElement("label", { className: "navbar-text no-padding" }, "Welcome back ", this.props.userName), _react2.default.createElement("button", { className: "btn btn-primary" }, "Logout"));
-			var navLeft = _react2.default.createElement("ul", { className: "nav navbar-nav" }, _react2.default.createElement("li", { className: window.location.hash == "#/profile" && "active" }, _react2.default.createElement(_reactRouterDom.Link, { to: "/profile" }, "Profile")), _react2.default.createElement("li", { className: window.location.hash == "#/mybooks" && "active" }, _react2.default.createElement(_reactRouterDom.Link, { to: "/mybooks" }, "My Books")));
-
-			if (!this.props.isLoggedIn) {
-				navRight = _react2.default.createElement(_loginForm2.default, { login: this.props.login });
-				navLeft = _react2.default.createElement("ul", { className: "nav navbar-nav" }, _react2.default.createElement("li", { className: window.location.hash == "#/register" && "active" }, _react2.default.createElement(_reactRouterDom.Link, { to: "/register" }, "Register")));
-			}
-
-			return _react2.default.createElement("nav", { className: "navbar navbar-default container-fluid", role: "navigation" }, _react2.default.createElement("div", { className: "container-fluid" }, navBarHeader, _react2.default.createElement("div", { className: "collapse navbar-collapse", id: "collapse-1" }, navLeft, navRight)));
-		}
-	}]);
-
-	return NavBar;
-}(_react2.default.Component);
-
-exports.default = NavBar;
-
-},{"./login-form":259,"react":255,"react-router-dom":171}],264:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = require('react-router-dom');
-
-var _jwtDecode = require('jwt-decode');
-
-var _jwtDecode2 = _interopRequireDefault(_jwtDecode);
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _profile = require('./profile');
-
-var _profile2 = _interopRequireDefault(_profile);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var ProfilePage = function (_React$Component) {
     _inherits(ProfilePage, _React$Component);
@@ -35253,23 +35468,21 @@ var ProfilePage = function (_React$Component) {
 
             delete profile.changed;
 
-            var query = {
-                method: "POST",
-                url: "/api/profile",
-                data: profile,
-                beforeSend: function beforeSend(xhr) {
-                    xhr.setRequestHeader('Authorization', "Bearer " + window.sessionStorage.token);
+            fetch('/api/profile', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + window.sessionStorage.token
                 },
-                success: function success(res) {
-                    _this2.setState(res);
-                },
-                error: function error(err) {
-                    console.log(err.message);
-                    _this2._checkAuth(err.status);
-                }
-            };
-
-            _jquery2.default.ajax(query);
+                body: JSON.stringify(profile)
+            }).then(function (res) {
+                return res.ok ? res.json() : Promise.reject(res);
+            }).then(function (res) {
+                _this2.setState(res);
+            }).catch(function (err) {
+                return console.log("Error: ", err);
+            });
         }
     }, {
         key: '_checkAuth',
@@ -35283,20 +35496,21 @@ var ProfilePage = function (_React$Component) {
         value: function componentWillMount() {
             var _this3 = this;
 
-            var query = {
-                url: "/api/profile",
-                beforeSend: function beforeSend(xhr) {
-                    xhr.setRequestHeader('Authorization', "Bearer " + window.sessionStorage.token);
-                },
-                success: function success(res) {
-                    _this3.setState(res);
-                },
-                error: function error(err) {
-                    console.log(err.message);
-                    _this3._checkAuth(err.status);
+            fetch('/api/profile', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + window.sessionStorage.token
                 }
-            };
-            _jquery2.default.ajax(query);
+            }).then(function (res) {
+                return res.ok ? res.json() : Promise.reject(res);
+            }).then(function (res) {
+                _this3.setState(res);
+            }).catch(function (err) {
+                console.log(err.message);
+                _this3._checkAuth(err.status);
+            });
         }
     }, {
         key: 'render',
@@ -35306,12 +35520,7 @@ var ProfilePage = function (_React$Component) {
                 page = _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
             }
 
-            return _react2.default.createElement(
-                'div',
-                null,
-                page,
-                _react2.default.createElement(_profile2.default, _extends({}, this.state, { saveProfile: this._saveChanges }))
-            );
+            return _react2.default.createElement('div', null, page, this.state._id != '' && _react2.default.createElement(_profile2.default, _extends({}, this.state, { saveProfile: this._saveChanges })));
         }
     }]);
 
@@ -35320,7 +35529,7 @@ var ProfilePage = function (_React$Component) {
 
 exports.default = ProfilePage;
 
-},{"./profile":265,"jquery":2,"jwt-decode":5,"react":255,"react-router-dom":171}],265:[function(require,module,exports){
+},{"./profile":265,"jwt-decode":5,"react":255,"react-router-dom":171}],265:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
